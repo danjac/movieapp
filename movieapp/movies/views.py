@@ -3,7 +3,7 @@ from django.template.response import TemplateResponse
 
 # Local
 from . import tmdb_api
-from .utils import format_movie_detail, format_movies, get_genre_dict
+from .formatters import format_movie_detail, format_movies, get_genre_dict
 
 
 def movie_list(request):
@@ -14,7 +14,7 @@ def movie_list(request):
     return TemplateResponse(
         request,
         "movies/index.html",
-        {"popular_movies": popular_movies, "now_playing": now_playing,},
+        {"popular_movies": popular_movies, "now_playing": now_playing},
     )
 
 

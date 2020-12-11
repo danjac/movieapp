@@ -77,7 +77,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
       {% for cast in movie.cast %}
       <div class="mt-8">
-        <a href="">
+        <a href="{% url 'actors:actor_detail' cast.id %}">
           <img src="{{ cast.profile_path }}"
                alt="actor1"
                class="hover:opacity-75 transition ease-in-out duration-150">

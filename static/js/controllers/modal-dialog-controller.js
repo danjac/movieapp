@@ -15,7 +15,6 @@ export default class extends Controller {
   }
 
   closeOnEsc(event) {
-    console.log(event.keyCode);
     if (event.keyCode === 27) {
       this.close();
     }

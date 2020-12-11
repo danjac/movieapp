@@ -7,6 +7,7 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     path("", include("movieapp.movies.urls")),
+    path("actors/", include("movieapp.actors.urls")),
     path("account/", include("allauth.urls")),
     path(settings.ADMIN_URL, admin.site.urls),
 ]

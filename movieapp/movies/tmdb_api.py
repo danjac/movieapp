@@ -41,6 +41,10 @@ def tv_genres():
     return _fetch_json("genre/tv/list")["results"]
 
 
+def popular_people(page=1):
+    return _fetch_json(f"person/popular?page={page}")["results"]
+
+
 def person(person_id):
     return _fetch_json(f"person/{person_id}")
 

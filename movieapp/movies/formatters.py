@@ -56,11 +56,19 @@ def format_images(images):
 
 
 def format_person(person):
+    known_for = ", ".join(
+        [
+            item["title"] if item["media_type"] == "movie" else item["name"]
+            for item in person.get("known_for", [])
+        ]
+    )
+
     return {
         **person,
+        "known_for": known_for,
         "profile_path": f"https://image.tmdb.org/t/p/w300{person['profile_path']}"
         if "profile_path" in person
-        else "https://via.placeholder.com/300x450",
+        else f"https://ui-avatars.com/api/?size=235&name={person['name']}",
     }
 
 
