@@ -1,14 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="movie-info border-b border-gray-800">
+
+<div class="tv-info border-b border-gray-800">
   <div class="container mx-auto px-4 py-16 flex flex-col md:flex-row">
     <div class="flex-none">
-      <img src="{{ movie.poster_path }}"
-           alt="poster"
+      <img src="{{ show.poster_path }}"
+           alt="parasite"
            class="w-64 lg:w-96">
     </div>
     <div class="md:ml-24">
-      <h2 class="text-4xl mt-4 md:mt-0 font-semibold">{{ movie.title }}</h2>
+      <h2 class="text-4xl mt-4 md:mt-0 font-semibold">{{ show.name }}</h2>
       <div class="flex flex-wrap items-center text-gray-400 text-sm">
         <svg class="fill-current text-orange-500 w-4"
              viewBox="0 0 24 24">
@@ -17,68 +18,69 @@
                   data-name="star" />
           </g>
         </svg>
-        <span class="ml-1">{{ movie.vote_average }}</span>
+        <span class="ml-1">{{ show.vote_average }}</span>
         <span class="mx-2">|</span>
-        <span>{{ movie.release_date|date:"SHORT_DATE_FORMAT" }}</span>
+        <span>{{ show.first_air_date }}</span>
         <span class="mx-2">|</span>
-        <span>{{ movie.genres }}</span>
+        <span>{{ show.genres }}</span>
       </div>
 
       <p class="text-gray-300 mt-8">
-        {{ movie.overview }}
+        {{ show.overview }}
       </p>
 
       <div class="mt-12">
-        <h4 class="text-white font-semibold">Featured Crew</h4>
         <div class="flex mt-4">
-          {% for crew in movie.crew %}
+          {% for crew in show.created_by %}
           <div class="mr-8">
             <div>{{ crew.name }}</div>
-            <div class="text-sm text-gray-400">{{ crew.job }}</div>
+            <div class="text-sm text-gray-400">Creator</div>
           </div>
           {% endfor %}
         </div>
       </div>
 
-      {% if movie.trailer %}
-      <div class="mt-12"
-           data-controller="modal">
-        <button data-action="modal#open"
-                class="flex inline-flex items-center bg-red-500 text-gray-900 rounded font-semibold px-5 py-4 hover:bg-orange-600 transition ease-in-out duration-150">
-          <svg class="w-6 fill-current"
-               viewBox="0 0 24 24">
-            <path d="M0 0h24v24H0z"
-                  fill="none" />
-            <path d="M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" /></svg>
-          <span class="ml-2">Play Trailer</span>
-        </button>
+      {% if show.trailer %}
+      <div data-controller="modal">
+        <div class="mt-12">
+          <button data-action="modal#open"
+                  class="flex inline-flex items-center bg-red-500 text-gray-900 rounded font-semibold px-5 py-4 hover:bg-orange-600 transition ease-in-out duration-150">
+            <svg class="w-6 fill-current"
+                 viewBox="0 0 24 24">
+              <path d="M0 0h24v24H0z"
+                    fill="none" />
+              <path d="M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" /></svg>
+            <span class="ml-2">Play Trailer</span>
+          </button>
+        </div>
+
         <template data-modal-target="content">
+
           <div class="responsive-container overflow-hidden relative"
                style="padding-top: 56.25%">
             <iframe class="responsive-iframe absolute top-0 left-0 w-full h-full"
-                    src="https://www.youtube.com/embed/{{ movie.trailer }}"
+                    src="https://www.youtube.com/embed/{{ show.trailer }}"
                     style="border:0;"
                     allow="autoplay; encrypted-media"
                     allowfullscreen></iframe>
           </div>
         </template>
       </div>
-      {% endif %}
-
     </div>
+    {% endif %}
 
   </div>
 </div>
-</div> <!-- end movie-info -->
+</div> <!-- end tv-info -->
 
-<div class="movie-cast border-b border-gray-800">
+<div class="tv-cast border-b border-gray-800">
   <div class="container mx-auto px-4 py-16">
     <h2 class="text-4xl font-semibold">Cast</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-      {% for cast in movie.cast %}
+      {% for member in show.cast %}
       <div class="mt-8">
-        <a href="{% url 'actors:actor_detail' cast.id %}">
-          <img src="{{ cast.profile_path }}"
+        <a href="{% url 'actors:actor_detail' member.id %}">
+          <img src="{{ member.profile_path }}"
                alt="actor1"
                class="hover:opacity-75 transition ease-in-out duration-150">
         </a>
@@ -86,38 +88,37 @@
           <a href=""
              class="text-lg mt-2 hover:text-gray:300">{{ cast.name }}</a>
           <div class="text-sm text-gray-400">
-            {{ cast.character }}
+            {{ member.character }}
           </div>
         </div>
       </div>
       {% endfor %}
     </div>
   </div>
-</div> <!-- end movie-cast -->
+</div> <!-- end tv-cast -->
 
-<div class="movie-images">
+<div class="tv-images">
   <div class="container mx-auto px-4 py-16">
     <h2 class="text-4xl font-semibold">Images</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-      {% for image in movie.images %}
+      {% for image in show.images %}
       <div class="mt-8"
            data-controller="modal">
         <a href="#"
            data-action="modal#open">
+
           <img src="{{ image.thumbnail }}"
                alt="image1"
                class="hover:opacity-75 transition ease-in-out duration-150">
         </a>
-
         <template data-modal-target="content">
           <img src="{{ image.original }}"
                alt="poster">
         </template>
-
       </div>
       {% endfor %}
     </div>
 
   </div>
-</div> <!-- end movie-images -->
+</div> <!-- end tv-images -->
 {% endblock content %}

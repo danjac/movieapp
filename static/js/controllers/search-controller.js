@@ -35,13 +35,14 @@ export default class extends Controller {
         break;
       case 40: // key down
       case 38: // key up
-        this.move(event);
+        this.navigateResults(event);
         break;
       default:
     }
   }
 
-  move(event) {
+  navigateResults(event) {
+    // focus up/down arrow navigation through results
     if (!this.showResultsValue || this.resultTargets.length === 0) {
       return;
     }

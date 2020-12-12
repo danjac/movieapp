@@ -49,6 +49,9 @@ ROOT_URLCONF = "movieapp.config.urls"
 WSGI_APPLICATION = "movieapp.config.wsgi.application"
 
 LOCAL_APPS = [
+    "movieapp.actors.apps.ActorsConfig",
+    "movieapp.movies.apps.MoviesConfig",
+    "movieapp.tv_shows.apps.TvShowsConfig",
     "movieapp.users.apps.UsersConfig",
 ]
 

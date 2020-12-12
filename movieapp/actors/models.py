@@ -17,8 +17,8 @@ class ActorDetailViewModel:
 
         cast = Box(credits, default_box=True).cast
 
-        self.known_for_movies = self.known_for_movies_model(cast)
-        self.credits = self.credits_model(cast)
+        self.known_for = self.known_for_model(cast)
+        self.future_credits, self.credits = self.credits_model(cast)
 
     def actor_model(self, actor):
         actor = Box(actor)
@@ -48,22 +48,29 @@ class ActorDetailViewModel:
         )
         return social
 
-    def known_for_movies_model(self, cast):
+    def known_for_model(self, cast):
         return [self.movie_model(movie) for movie in cast]
 
     def credits_model(self, cast):
-        return sorted(
-            [self.credit_model(credit) for credit in cast],
+
+        credits = [self.credit_model(credit) for credit in cast]
+
+        future_credits = [c for c in credits if c.release_year is None]
+
+        other_credits = sorted(
+            [c for c in credits if c.release_year is not None],
             key=operator.attrgetter("release_date"),
             reverse=True,
         )
+
+        return future_credits, other_credits
 
     def credit_model(self, credit):
         release_date = credit.release_date or credit.first_release_date
         if release_date:
             release_date = parser.parse(release_date)
         credit.release_date = release_date or datetime.datetime.today()
-        credit.release_year = release_date.year if release_date else "Future"
+        credit.release_year = release_date.year if release_date else None
         credit.title = credit.title or credit.name or "Untitled"
         credit.url = reverse("movies:movie_detail", args=[credit.id])
         return credit
@@ -83,8 +90,9 @@ class ActorDetailViewModel:
         return {
             "actor": self.actor,
             "social": self.social,
-            "known_for_movies": self.known_for_movies,
+            "known_for": self.known_for,
             "credits": self.credits,
+            "future_credits": self.future_credits,
         }
 
 

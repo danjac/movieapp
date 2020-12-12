@@ -1,8 +1,10 @@
 # Django
 from django.template.response import TemplateResponse
 
+# MovieApp
+from movieapp.common import tmdb_api
+
 # Local
-from . import tmdb_api
 from .models import MovieDetailViewModel, MovieListViewModel
 
 

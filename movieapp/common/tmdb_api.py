@@ -7,12 +7,6 @@ import requests
 BASE_URL = "https://api.themoviedb.org/3/"
 
 
-def _fetch_json(url):
-    return requests.get(
-        BASE_URL + url, headers={"Authorization": f"Bearer {settings.TMDB_API_TOKEN}"},
-    ).json()
-
-
 def popular_movies():
     return _fetch_json("movie/popular")["results"]
 
@@ -41,8 +35,12 @@ def top_rated_tv():
     return _fetch_json("tv/top_rated")["results"]
 
 
+def tv_show(show_id):
+    return _fetch_json(f"tv/{show_id}?append_to_response=credits,videos,images")
+
+
 def tv_genres():
-    return _fetch_json("genre/tv/list")["results"]
+    return _fetch_json("genre/tv/list")["genres"]
 
 
 def popular_people(page=1):
@@ -59,3 +57,9 @@ def links(person_id):
 
 def credits(person_id):
     return _fetch_json(f"person/{person_id}/credits")
+
+
+def _fetch_json(url):
+    return requests.get(
+        BASE_URL + url, headers={"Authorization": f"Bearer {settings.TMDB_API_TOKEN}"},
+    ).json()

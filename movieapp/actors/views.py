@@ -2,7 +2,7 @@
 from django.template.response import TemplateResponse
 
 # MovieApp
-from movieapp.movies import tmdb_api
+from movieapp.common import tmdb_api
 
 # Local
 from .models import ActorDetailViewModel, ActorListViewModel
