@@ -19,3 +19,4 @@ You can get an API key ![here](https://www.themoviedb.org/documentation/api). Ma
 
 > docker-compose up -d
 
+Demo: https://dj-movieapp.herokuapp.com
