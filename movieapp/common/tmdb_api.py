@@ -1,3 +1,6 @@
+# Standard Library
+from functools import lru_cache
+
 # Django
 from django.conf import settings
 
@@ -59,6 +62,7 @@ def credits(person_id):
     return _fetch_json(f"person/{person_id}/credits")
 
 
+@lru_cache
 def _fetch_json(url):
     return requests.get(
         BASE_URL + url, headers={"Authorization": f"Bearer {settings.TMDB_API_TOKEN}"},

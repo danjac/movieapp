@@ -22,10 +22,12 @@ class ActorDetailViewModel:
 
     def actor_model(self, actor):
         actor = Box(actor)
-        actor.birthday = parser.parse(actor.birthday)
-        actor.age = relativedelta.relativedelta(
-            datetime.datetime.today(), actor.birthday
-        ).years
+        actor.birthday = parser.parse(actor.birthday) if actor.birthday else None
+        actor.age = (
+            relativedelta.relativedelta(datetime.datetime.today(), actor.birthday).years
+            if actor.birthday
+            else None
+        )
         actor.profile_path = (
             f"https://image.tmdb.org/t/p/w300/{actor.profile_path}"
             if actor.profile_path
