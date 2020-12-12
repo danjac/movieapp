@@ -75,7 +75,8 @@ pytest-mock==3.3.1        # via -r requirements.in
 pytest-randomly==3.4.1    # via -r requirements.in
 pytest-xdist==2.1.0       # via -r requirements.in
 pytest==6.1.2             # via -r requirements.in, pytest-cov, pytest-django, pytest-forked, pytest-mock, pytest-randomly, pytest-xdist
-python-dateutil==2.8.1    # via botocore, django-silk, faker
+python-box==5.2.0         # via -r requirements.in
+python-dateutil==2.8.1    # via -r requirements.in, botocore, django-silk, faker
 python3-openid==3.2.0     # via django-allauth
 pytz==2020.4              # via -r requirements.in, celery, django, django-silk
 redis==3.5.3              # via -r requirements.in, django-redis

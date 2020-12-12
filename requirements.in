@@ -25,6 +25,8 @@ pytest-django
 pytest-mock
 pytest-randomly
 pytest-xdist
+python-box
+python-dateutil
 pytz
 redis
 sentry_sdk
