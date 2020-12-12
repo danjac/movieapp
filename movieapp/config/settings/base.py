@@ -78,7 +78,6 @@ MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.locale.LocaleMiddleware",
     "movieapp.common.middleware.turbolinks.TurbolinksMiddleware",
-    "movieapp.common.middleware.ajax.AjaxRequestFragmentMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
