@@ -82,6 +82,7 @@
         <a href="{% url 'actors:actor_detail' member.id %}">
           <img src="{{ member.profile_path }}"
                alt="actor1"
+               loading="lazy"
                class="hover:opacity-75 transition ease-in-out duration-150">
         </a>
         <div class="mt-2">
@@ -109,10 +110,12 @@
 
           <img src="{{ image.thumbnail }}"
                alt="image1"
+               loading="lazy"
                class="hover:opacity-75 transition ease-in-out duration-150">
         </a>
         <template data-modal-target="content">
           <img src="{{ image.original }}"
+               loading="lazy"
                alt="poster">
         </template>
       </div>
