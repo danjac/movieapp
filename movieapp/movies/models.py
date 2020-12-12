@@ -12,7 +12,9 @@ class BaseMovieViewModel:
             else "https://via.placeholder.com/500x750"
         )
 
-        movie.release_date = parser.parse(movie.release_date)
+        movie.release_date = (
+            parser.parse(movie.release_date) if movie.release_date else None
+        )
         movie.vote_average = f"{int(round(movie.vote_average * 10))}%"
         return movie
 
