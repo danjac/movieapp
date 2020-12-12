@@ -10,12 +10,10 @@ import requests
 BASE_URL = "https://api.themoviedb.org/3/"
 
 
-@lru_cache
 def popular_movies():
     return _fetch_json("movie/popular")["results"]
 
 
-@lru_cache
 def now_playing():
     return _fetch_json("movie/now_playing")["results"]
 
@@ -33,12 +31,10 @@ def movie(movie_id):
     return _fetch_json(f"movie/{movie_id}?append_to_response=credits,videos,images")
 
 
-@lru_cache
 def popular_tv():
     return _fetch_json("tv/popular")["results"]
 
 
-@lru_cache
 def top_rated_tv():
     return _fetch_json("tv/top_rated")["results"]
 
@@ -52,7 +48,6 @@ def tv_show(show_id):
     return _fetch_json(f"tv/{show_id}?append_to_response=credits,videos,images")
 
 
-@lru_cache
 def popular_people(page=1):
     return _fetch_json(f"person/popular?page={page}")["results"]
 
