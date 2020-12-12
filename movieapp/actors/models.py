@@ -101,7 +101,7 @@ class ActorListViewModel:
         )
         actor.known_for = ", ".join(
             [
-                "title" if item.media_type == "movie" else "name"
+                item.title if item.media_type == "movie" else item.name
                 for item in actor.known_for
             ]
         )

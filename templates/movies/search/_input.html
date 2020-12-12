@@ -1,0 +1,29 @@
+<div class="relative mt-3 md:mt-0"
+     data-controller="search"
+     data-search-url-value="{% url 'movies:search_movies' %}">
+  <input data-search-target="input"
+         type="search"
+         class="bg-gray-800 text-sm rounded-full w-64 px-4 pl-8 py-1 focus:outline-none focus:ring"
+         placeholder="Search (Press '/' to focus)"
+         data-action="keydown->search#search click@window->search#close keydown@window->search#keydown">
+  <div class="absolute top-0">
+    <svg class="fill-current w-4 text-gray-500 mt-2 ml-2"
+         viewBox="0 0 24 24">
+      <path class="heroicon-ui"
+            d="M16.32 14.9l5.39 5.4a1 1 0 01-1.42 1.4l-5.38-5.38a8 8 0 111.41-1.41zM10 16a6 6 0 100-12 6 6 0 000 12z" /></svg>
+    <svg class="animate-spin h-5 w-5 mr-4 top-0 right-0 hidden"
+         data-search-target="loading"
+         viewBox="0 0 24 24">
+      <circle class="path"
+              cx="25"
+              cy="25"
+              r="20"
+              fill="none"
+              stroke-width="5"></circle>
+    </svg>
+  </div>
+
+  <div class="z-50 absolute bg-gray-800 text-sm rounded w-64 mt-4 hidden"
+       data-search-target="results">
+  </div>
+</div>

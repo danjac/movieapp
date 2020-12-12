@@ -18,3 +18,14 @@ def movie_list(request):
 def movie_detail(request, movie_id):
     view_model = MovieDetailViewModel(tmdb_api.movie(movie_id))
     return TemplateResponse(request, "movies/detail.html", view_model.as_dict())
+
+
+def search_movies(request):
+    search = request.GET.get("search")
+    if search and len(search) > 2:
+        results = tmdb_api.search_movies(search)[:7]
+    else:
+        results = []
+    return TemplateResponse(
+        request, "movies/search/_results.html", {"results": results, "search": search}
+    )

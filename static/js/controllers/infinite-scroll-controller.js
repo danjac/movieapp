@@ -14,6 +14,7 @@ export default class extends Controller {
       append: '.' + this.appendClass,
       status: '.' + this.statusClass,
       path: this.paginationUrlValue,
+      history: false,
     });
   }
 

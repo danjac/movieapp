@@ -21,6 +21,10 @@ def now_playing():
     return _fetch_json("movie/now_playing")["results"]
 
 
+def search_movies(search):
+    return _fetch_json(f"search/movie?query={search}")["results"]
+
+
 def movie_genres():
     return _fetch_json("genre/movie/list")["genres"]
 

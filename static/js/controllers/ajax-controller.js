@@ -3,7 +3,7 @@ import Turbolinks from 'turbolinks';
 import { Controller } from 'stimulus';
 
 export default class extends Controller {
-  static targets = ['fragment'];
+  static targets = ['fragment', 'loading'];
   static values = {
     confirm: String,
     redirect: String,
