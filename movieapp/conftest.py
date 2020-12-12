@@ -38,3 +38,23 @@ def login_user(client):
     user.save()
     client.login(username=user.username, password=password)
     return user
+
+
+@pytest.fixture
+def movie():
+    return {
+        "id": 1,
+        "genre_ids": [1, 2],
+        "title": "Star Wars: A New Hope",
+        "poster_path": "/star-wars-a-new-hope.jpg",
+        "release_date": "1977-5-4",
+        "vote_average": 9,
+    }
+
+
+@pytest.fixture
+def genres():
+    return [
+        {"id": 1, "name": "Drama"},
+        {"id": 2, "name": "Sci-fi"},
+    ]
