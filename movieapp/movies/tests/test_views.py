@@ -35,3 +35,5 @@ class TestMovieList:
 
         resp = views.movie_list(rf.get(reverse("movies:movie_list")))
         assert resp.status_code == 200
+        assert len(resp.context_data["popular_movies"]) == 1
+        assert len(resp.context_data["now_playing"]) == 1
