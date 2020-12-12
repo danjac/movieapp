@@ -65,7 +65,7 @@ export default class extends Controller {
 
   showResultsValueChanged() {
     if (!this.showResultsValue) {
-      this.resultsTarget.innerHTML = '';
+      this.resultsTarget.textContent = '';
       this.resultsTarget.classList.add('hidden');
       this.resultIndex = 0;
     } else {

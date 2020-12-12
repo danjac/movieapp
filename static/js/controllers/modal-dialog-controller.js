@@ -5,13 +5,14 @@ export default class extends Controller {
 
   open(event) {
     const { content } = event.detail;
+    this.containerTarget.textContent = '';
     this.containerTarget.append(content);
     this.element.classList.remove('hidden');
   }
 
   close() {
     this.element.classList.add('hidden');
-    this.containerTarget.innerHTML = '';
+    this.containerTarget.textContent = '';
   }
 
   closeOnEsc(event) {
