@@ -28,6 +28,7 @@ def search_movies(request):
         results = tmdb_api.search_movies(search)[:7]
     else:
         results = []
+
     return TemplateResponse(
-        request, "movies/search/_results.html", {"results": results, "search": search}
+        request, "movies/search/_results.html", {"results": results, "search": search},
     )

@@ -5,6 +5,8 @@
 !.pylintrc
 __pycache__
 node_modules
+media
+static/dev
 npm-debug.log
 LICENSE
 README.md
