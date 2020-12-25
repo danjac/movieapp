@@ -76,13 +76,15 @@ export default class extends Controller {
   async searchValueChanged() {
     if (this.searchValue.length > 2) {
       this.loadingTarget.classList.remove('hidden');
+
       try {
-        const response = await axios.get(this.urlValue, {
-          params: {
+        const response = await fetch(
+          `${this.urlValue}?${new URLSearchParams({
             search: this.searchValue,
-          },
-        });
-        this.resultsTarget.innerHTML = response.data;
+          }).toString()}`
+        );
+
+        this.resultsTarget.innerHTML = await response.text();
         this.resultsTarget.classList.remove('hidden');
         this.showResultsValue = true;
       } finally {
