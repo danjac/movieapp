@@ -1,6 +1,4 @@
-import axios from 'axios';
 import debounce from 'lodash.debounce';
-import throttle from 'lodash.throttle';
 import { Controller } from 'stimulus';
 
 export default class extends Controller {
@@ -9,7 +7,6 @@ export default class extends Controller {
 
   initialize() {
     this.search = debounce(this.search, 500).bind(this);
-    this.search = throttle(this.search, 500).bind(this);
   }
 
   connect() {
