@@ -1,8 +1,11 @@
-  <div class="relative mt-3 md:mt-0"
-       data-controller="search"
-       data-search-url-value="{% url 'movies:search_movies' %}">
+  <form class="relative mt-3 md:mt-0"
+        data-controller="search"
+        method="get"
+        action="{% url 'movies:search_movies' %}">
     <input data-search-target="input"
            type="search"
+           name="search"
+           autocomplete="off"
            class="bg-gray-800 text-sm rounded-full w-64 px-4 pl-8 py-1 focus:outline-none focus:ring"
            placeholder="Search (Press '/' to focus)"
            data-action="keydown->search#search click@window->search#close keydown@window->search#keydown">
@@ -23,7 +26,7 @@
       </svg>
     </div>
 
-    <div class="z-50 absolute bg-gray-800 text-sm rounded w-64 mt-4 hidden"
+    <div id="search-results"
          data-search-target="results">
     </div>
-  </div>
+  </form>

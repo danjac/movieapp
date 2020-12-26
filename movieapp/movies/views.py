@@ -3,6 +3,7 @@ from django.template.response import TemplateResponse
 
 # MovieApp
 from movieapp.common import tmdb_api
+from movieapp.common.turbo.response import TurboStreamTemplateResponse
 
 # Local
 from .models import MovieDetailViewModel, MovieListViewModel
@@ -29,6 +30,10 @@ def search_movies(request):
     else:
         results = []
 
-    return TemplateResponse(
-        request, "movies/search/_results.html", {"results": results, "search": search},
+    return TurboStreamTemplateResponse(
+        request,
+        "movies/search/_results.html",
+        {"results": results, "search": search},
+        target="search-results",
+        action="update",
     )

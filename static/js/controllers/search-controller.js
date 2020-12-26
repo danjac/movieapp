@@ -2,8 +2,8 @@ import debounce from 'lodash.debounce';
 import { Controller } from 'stimulus';
 
 export default class extends Controller {
-  static targets = ['input', 'results', 'loading', 'result'];
-  static values = { url: String, showResults: Boolean, search: String };
+  static targets = ['input', 'results', 'result'];
+  static values = { search: String };
 
   initialize() {
     this.search = debounce(this.search, 500).bind(this);
@@ -18,7 +18,7 @@ export default class extends Controller {
   }
 
   close() {
-    this.showResultsValue = false;
+    this.resultsTarget.innerHTML = '';
   }
 
   keydown(event) {
@@ -40,7 +40,7 @@ export default class extends Controller {
 
   navigateResults(event) {
     // focus up/down arrow navigation through results
-    if (!this.showResultsValue || this.resultTargets.length === 0) {
+    if (!this.resultTargets.length === 0) {
       return;
     }
 
@@ -60,35 +60,18 @@ export default class extends Controller {
     }
   }
 
-  showResultsValueChanged() {
-    if (!this.showResultsValue) {
-      this.resultsTarget.textContent = '';
-      this.resultsTarget.classList.add('hidden');
-      this.resultIndex = 0;
-    } else {
-      this.resultsTarget.classList.remove('hidden');
+  async searchValueChanged() {
+    if (this.searchValue.length > 2) {
+      this.triggerSubmit();
     }
   }
 
-  async searchValueChanged() {
-    if (this.searchValue.length > 2) {
-      this.loadingTarget.classList.remove('hidden');
-
-      try {
-        const response = await fetch(
-          `${this.urlValue}?${new URLSearchParams({
-            search: this.searchValue,
-          }).toString()}`
-        );
-
-        this.resultsTarget.innerHTML = await response.text();
-        this.resultsTarget.classList.remove('hidden');
-        this.showResultsValue = true;
-      } finally {
-        this.loadingTarget.classList.add('hidden');
-      }
+  triggerSubmit() {
+    if (this.element.requestSubmit) {
+      this.element.requestSubmit();
     } else {
-      this.close();
+      // fallback for older browsers
+      this.element.dispatchEvent(new CustomEvent('submit', { bubbles: true }));
     }
   }
 }
